@@ -2,6 +2,14 @@
 
 import pytest
 
+try:
+    import pytest_asyncio
+except ModuleNotFoundError as exc:  # pragma: no cover - configuration safeguard
+    raise RuntimeError(
+        "pytest-asyncio is required to run the async test suite. "
+        "Install dev dependencies with: pip install -e '.[dev]'"
+    ) from exc
+
 from gdpr_safe_rag.audit_logger import AuditLogger
 from gdpr_safe_rag.audit_logger.backends.memory_backend import MemoryBackend
 from gdpr_safe_rag.pii_detector import PIIDetector
@@ -25,7 +33,7 @@ def memory_backend() -> MemoryBackend:
     return MemoryBackend()
 
 
-@pytest.fixture
+@pytest_asyncio.fixture
 async def audit_logger(memory_backend: MemoryBackend) -> AuditLogger:
     """Create an AuditLogger instance with memory backend."""
     logger = AuditLogger(backend=memory_backend)
