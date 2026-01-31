@@ -1,0 +1,12 @@
+# Core
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+sqlalchemy>=2.0.0
+asyncpg>=0.28.0
+aiosqlite>=0.19.0
+
+# Patterns & Validation
+regex>=2023.0.0
+
+# Optional: NER support
+# spacy>=3.0.0
