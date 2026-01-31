@@ -49,10 +49,10 @@ spacy = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/example/gdpr-safe-rag"
-Documentation = "https://github.com/example/gdpr-safe-rag#readme"
-Repository = "https://github.com/example/gdpr-safe-rag"
-Issues = "https://github.com/example/gdpr-safe-rag/issues"
+Homepage = "https://github.com/Charlescifix/gdpr-safe-rag"
+Documentation = "https://github.com/Charlescifix/gdpr-safe-rag#readme"
+Repository = "https://github.com/Charlescifix/gdpr-safe-rag"
+Issues = "https://github.com/Charlescifix/gdpr-safe-rag/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]

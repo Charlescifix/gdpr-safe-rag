@@ -25,7 +25,7 @@ pip install gdpr-safe-rag
 Or install from source:
 
 ```bash
-git clone https://github.com/example/gdpr-safe-rag.git
+git clone https://github.com/Charlescifix/gdpr-safe-rag.git
 cd gdpr-safe-rag
 pip install -e .
 ```
@@ -169,7 +169,7 @@ AUDIT_RETENTION_DAYS=2555  # ~7 years
 
 ```bash
 # Clone repository
-git clone https://github.com/example/gdpr-safe-rag.git
+git clone https://github.com/Charlescifix/gdpr-safe-rag.git
 cd gdpr-safe-rag
 
 # Install development dependencies
@@ -237,5 +237,5 @@ Contributions are welcome! Please read our contributing guidelines and submit pu
 
 ## Support
 
-- GitHub Issues: [Report bugs or request features](https://github.com/example/gdpr-safe-rag/issues)
+- GitHub Issues: [Report bugs or request features](https://github.com/Charlescifix/gdpr-safe-rag/issues)
 - Documentation: [Full documentation](docs/)
