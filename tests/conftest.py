@@ -1,14 +1,9 @@
 """Pytest configuration and fixtures."""
 
-import pytest
+import asyncio
+import inspect
 
-try:
-    import pytest_asyncio
-except ModuleNotFoundError as exc:  # pragma: no cover - configuration safeguard
-    raise RuntimeError(
-        "pytest-asyncio is required to run the async test suite. "
-        "Install dev dependencies with: pip install -e '.[dev]'"
-    ) from exc
+import pytest
 
 from gdpr_safe_rag.audit_logger import AuditLogger
 from gdpr_safe_rag.audit_logger.backends.memory_backend import MemoryBackend
@@ -33,13 +28,34 @@ def memory_backend() -> MemoryBackend:
     return MemoryBackend()
 
 
-@pytest_asyncio.fixture
-async def audit_logger(memory_backend: MemoryBackend) -> AuditLogger:
+def pytest_configure(config: pytest.Config) -> None:
+    """Register custom markers for the test suite."""
+    config.addinivalue_line(
+        "markers",
+        "asyncio: mark test as using asyncio without requiring pytest-asyncio",
+    )
+
+
+@pytest.hookimpl(tryfirst=True)
+def pytest_pyfunc_call(pyfuncitem: pytest.Function) -> bool | None:
+    """Run async tests with asyncio without relying on external plugins."""
+    testfunction = pyfuncitem.obj
+    if inspect.iscoroutinefunction(testfunction):
+        funcargs = {
+            arg: pyfuncitem.funcargs[arg] for arg in pyfuncitem._fixtureinfo.argnames
+        }
+        asyncio.run(testfunction(**funcargs))
+        return True
+    return None
+
+
+@pytest.fixture
+def audit_logger(memory_backend: MemoryBackend) -> AuditLogger:
     """Create an AuditLogger instance with memory backend."""
     logger = AuditLogger(backend=memory_backend)
-    await logger.initialize()
+    asyncio.run(logger.initialize())
     yield logger
-    await logger.close()
+    asyncio.run(logger.close())
 
 
 # Sample texts for testing
