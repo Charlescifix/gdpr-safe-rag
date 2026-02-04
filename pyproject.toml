@@ -5,86 +5,71 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "gdpr-safe-rag"
 version = "0.1.0"
-description = "Production-grade Python toolkit for GDPR-compliant RAG systems with automatic PII detection, audit trails, and compliance validation"
-readme = "README.md"
-license = {text = "MIT"}
 authors = [
-    {name = "GDPR Safe RAG Team", email = "team@example.com"}
+    {name = "Charles Nwankpa", email = "charlesnwankpa@gen3block.com"}
 ]
-keywords = ["gdpr", "rag", "pii", "compliance", "audit", "privacy"]
+description = "Production-grade Python toolkit for building GDPR-compliant RAG systems with automatic PII detection, audit trails, and compliance validation"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+keywords = [
+    "gdpr",
+    "rag",
+    "retrieval-augmented-generation",
+    "pii-detection",
+    "compliance",
+    "privacy",
+    "langchain",
+    "llamaindex",
+    "data-protection",
+    "audit-logging"
+]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
-    "Topic :: Security",
-    "Topic :: Software Development :: Libraries :: Python Modules",
-    "Typing :: Typed",
 ]
-requires-python = ">=3.10"
+
 dependencies = [
     "pydantic>=2.0.0",
     "pydantic-settings>=2.0.0",
     "sqlalchemy>=2.0.0",
-    "asyncpg>=0.28.0",
-    "aiosqlite>=0.19.0",
-    "regex>=2023.0.0",
+    "regex>=2022.0.0",
 ]
 
 [project.optional-dependencies]
+postgres = [
+    "psycopg2-binary>=2.9.0",
+]
+ner = [
+    "spacy>=3.0.0",
+]
+all = [
+    "psycopg2-binary>=2.9.0",
+    "spacy>=3.0.0",
+]
 dev = [
-    "pytest>=7.0.0",
-    "pytest-asyncio>=0.21.0",
-    "pytest-cov>=4.0.0",
-    "mypy>=1.0.0",
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
     "black>=23.0.0",
     "ruff>=0.1.0",
-]
-spacy = [
-    "spacy>=3.0.0",
+    "mypy>=1.0.0",
 ]
 
 [project.urls]
 Homepage = "https://github.com/Charlescifix/gdpr-safe-rag"
-Documentation = "https://github.com/Charlescifix/gdpr-safe-rag#readme"
+Documentation = "https://github.com/Charlescifix/gdpr-safe-rag/blob/main/docs/"
 Repository = "https://github.com/Charlescifix/gdpr-safe-rag"
 Issues = "https://github.com/Charlescifix/gdpr-safe-rag/issues"
+Changelog = "https://github.com/Charlescifix/gdpr-safe-rag/blob/main/CHANGELOG.md"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["gdpr_safe_rag*"]
-
-[tool.pytest.ini_options]
-asyncio_mode = "auto"
-testpaths = ["tests"]
-addopts = "-v --tb=short"
-
-[tool.mypy]
-python_version = "3.10"
-strict = true
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = true
-disallow_incomplete_defs = true
-
-[tool.black]
-line-length = 100
-target-version = ["py310", "py311", "py312"]
-
-[tool.ruff]
-line-length = 100
-target-version = "py310"
-select = [
-    "E",  # pycodestyle errors
-    "W",  # pycodestyle warnings
-    "F",  # Pyflakes
-    "I",  # isort
-    "B",  # flake8-bugbear
-    "C4", # flake8-comprehensions
-    "UP", # pyupgrade
-]
-ignore = ["E501"]  # line too long (handled by black)
+[tool.setuptools]
+packages = ["gdpr_safe_rag"]
