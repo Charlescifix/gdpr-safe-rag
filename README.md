@@ -233,7 +233,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## Contributing
 
-Contributions are welcome! Please read our contributing guidelines and submit pull requests.
+Contributions are welcome! Please read our [contributing guidelines](CONTRIBUTING.md) and submit pull requests.
 
 ## Support
 
